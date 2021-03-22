@@ -8,26 +8,26 @@ from keras.models import load_model
 import numpy as np
 
 features = [
-    'age', 
-    'sex', 
-    'chest_pain', 
-    'blood_pressure', 
-    'serum_cholestoral',
-    'fasting_blood_sugar', 
-    'electrocardiographic', 
-    'max_heart_rate',
-    'induced_angina', 
-    'ST_depression', 
-    'slope', 
-    'vessels', 
-    'thal',
+     'CreditScore',
+     'Age',
+     'Tenure',
+     'Balance',
+     'NumOfProducts',
+     'HasCrCard',
+     'IsActiveMember',
+     'EstimatedSalary',
+     'France',
+     'Germany',
+     'Spain',
+     'Female',
+     'Male'
 ]
 
 # Load saved ML models
 tf_model = load_model('neural')
-with open('adaboost.pkl', 'rb') as f:
-    adaboost_model = pickle.load(f)
-    
+
+with open('NickRoyModel.pkl', 'rb') as f:
+    NickRoyModel = pickle.load(f)
 
 # Load scaler info    
 with open('scaler_means.json') as fin:
@@ -66,12 +66,12 @@ def home():
     return 'App is Healthy'
 
 
-@app.route('/adaboost', methods=['POST'])
-def adaboost():       
+@app.route('/NickRoy', methods=['POST'])
+def NickRoyModel():       
         
     content = scale_data(request.json)
     data_array = convert_to_array(content)
-    prediction = int(adaboost_model.predict(data_array))
+    prediction = int(NickRoyModel.predict(data_array))
     
     return jsonify(prediction)
 
