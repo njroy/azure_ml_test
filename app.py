@@ -26,7 +26,7 @@ features = [
 # Load saved ML models
 tf_model = load_model('neural')
 
-with open('NickRoyModel.pkl', 'rb') as f:
+with open('NickRoyModelv2.pkl', 'rb') as f:
     NickRoyModel = pickle.load(f)
 
 # Load scaler info    
