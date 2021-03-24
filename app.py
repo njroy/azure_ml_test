@@ -71,7 +71,7 @@ def NickRoyModel():
         
     content = scale_data(request.json)
     data_array = convert_to_array(content)
-    prediction = int(NickRoyModel.predict(data_array))
+    prediction = int((NickRoyModel.predict(data_array) > 0.5).astype(int))
     
     return jsonify(prediction)
 
