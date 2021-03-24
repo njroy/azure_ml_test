@@ -41,7 +41,8 @@ with open('scaler_sigmas.json') as fin:
 def scale_data(data_json):
     
     for key in data_json:
-        data_json[key] = (data_json[key] - scaler_means[key])/scaler_means[key]
+        if scaler_means[key] != 0:
+            data_json[key] = (data_json[key] - scaler_means[key])/scaler_means[key]
     
     return data_json
 
@@ -67,7 +68,7 @@ def home():
 
 
 @app.route('/NickRoy', methods=['POST'])
-def NickRoyModel():       
+def NickRoyModelFunction():       
         
     content = scale_data(request.json)
     data_array = convert_to_array(content)
